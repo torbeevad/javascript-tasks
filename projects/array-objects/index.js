@@ -47,9 +47,8 @@ function reduce(array, fn, initial) {
  */
 function upperProps(obj) {
   const array = [];
-  for (let key in obj) {
-    key = key.toUpperCase();
-    array.push(key);
+  for (const key in obj) {
+    array.push(key.toUpperCase());
   }
   return array;
 }
