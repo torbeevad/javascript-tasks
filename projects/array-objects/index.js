@@ -7,8 +7,11 @@
  Пример:
    forEach([1, 2, 3], (el) => console.log(el))
  */
-function forEach(array, fn) {}
-
+function forEach(array, fn) {
+  for (let i = 0; i < array.length; i++) {
+    fn(array[i], i, array);
+  }
+}
 /*
  Задание 2:
  Напишите аналог встроенного метода map для работы с массивами
@@ -16,8 +19,13 @@ function forEach(array, fn) {}
  Пример:
    map([1, 2, 3], (el) => el ** 2) // [1, 4, 9]
  */
-function map(array, fn) {}
-
+function map(array, fn) {
+  const newArray = [];
+  for (let i = 0; i < array.length; i++) {
+    newArray[i] = fn(array[i], i, array);
+  }
+  return newArray;
+}
 /*
  Задание 3:
  Напишите аналог встроенного метода reduce для работы с массивами
@@ -25,16 +33,26 @@ function map(array, fn) {}
  Пример:
    reduce([1, 2, 3], (all, current) => all + current) // 6
  */
-function reduce(array, fn, initial) {}
-
+function reduce(array, fn, initial) {
+  for (let i = 0; i < array.length; i++) {
+    initial = fn(initial, array[i], i, array);
+  }
+  return initial;
+}
 /*
  Задание 4:
  Функция должна перебрать все свойства объекта, преобразовать их имена в верхний регистр и вернуть в виде массива
  Пример:
    upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
  */
-function upperProps(obj) {}
-
+function upperProps(obj) {
+  const array = [];
+  for (let key in obj) {
+    key = key.toUpperCase();
+    array.push(key);
+  }
+  return array;
+}
 /*
  Задание 5 *:
  Функция принимает объект и должна вернуть Proxy для этого объекта
@@ -44,6 +62,20 @@ function upperProps(obj) {}
    obj.foo = 2;
    console.log(obj.foo); // 4
  */
-function createProxy(obj) {}
+function createProxy(obj) {
+  // const proxy = new Proxy(obj, {
+  //   get(target, prop,) {
+  //     console.log(prop)
+  //     return target[prop]
+  //   },
+  //   set(target, prop, value) {
+  //     return value = value * value
+  //   }
+  // })
+}
+
+// const obj = createProxy({});
+// obj.foo = 2;
+// console.log(obj.foo);
 
 export { forEach, map, reduce, upperProps, createProxy };
