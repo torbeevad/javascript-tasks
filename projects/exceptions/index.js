@@ -23,17 +23,15 @@ function isAllTrue(array, fn) {
 
   let isAllElementsTrue = true;
 
-  if (isAllElementsTrue === true) {
-    for (let i = 0; i < array.length; i++) {
-      isAllElementsTrue = fn(array[i]);
+  for (let i = 0; i < array.length; i++) {
+    isAllElementsTrue = fn(array[i]);
 
-      if (isAllElementsTrue === false) {
-        return isAllElementsTrue;
-      }
+    if (isAllElementsTrue === false) {
+      return isAllElementsTrue;
     }
-
-    return isAllElementsTrue;
   }
+
+  return isAllElementsTrue;
 }
 /*
  Задание 2:
