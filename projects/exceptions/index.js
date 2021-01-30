@@ -16,24 +16,25 @@ function isAllTrue(array, fn) {
   if (Object.prototype.toString.call(array) !== '[object Array]' || array.length === 0) {
     throw new Error('empty array');
   }
+
   if (typeof fn !== 'function') {
     throw new Error('fn is not a function');
   }
-  let resultTrue = 0;
-  for (let i = 0; i < array.length; i++) {
-    const checkIndexValue = fn(array[i]);
-    if (checkIndexValue === false) {
-      return false;
+
+  let isAllElementsTrue = true;
+
+  if (isAllElementsTrue === true) {
+    for (let i = 0; i < array.length; i++) {
+      isAllElementsTrue = fn(array[i]);
+
+      if (isAllElementsTrue === false) {
+        return isAllElementsTrue;
+      }
     }
-    if (checkIndexValue === true) {
-      resultTrue++;
-    }
-    if (array.length === resultTrue) {
-      return true;
-    }
+
+    return isAllElementsTrue;
   }
 }
-
 /*
  Задание 2:
  2.1: Функция принимает массив и фильтрующую функцию и должна вернуть true или false
@@ -55,29 +56,16 @@ function isSomeTrue(array, fn) {
     throw new Error('fn is not a function');
   }
 
-  let falseResultCount = 0;
-  let trueResultCount = 0;
+  let isSomeTrue = false;
   let i = 0;
 
-  while (i < array.length) {
-    const checkIndexValue = fn(array[i]);
-    if (checkIndexValue === true) {
-      trueResultCount++;
-    }
-    if (checkIndexValue === false) {
-      falseResultCount++;
-    }
-    if (falseResultCount + trueResultCount === array.length && trueResultCount > 0) {
-      return true;
-    }
-    if (falseResultCount + trueResultCount === array.length && trueResultCount === 0) {
-      return false;
-    }
-
+  while (i < array.length && isSomeTrue === false) {
+    isSomeTrue = fn(array[i]);
     i++;
   }
-}
 
+  return isSomeTrue;
+}
 /*
  Задание 3:
  3.1: Функция принимает заранее неизвестное количество аргументов, первым из которых является функция fn
@@ -100,6 +88,7 @@ function returnBadArguments(fn) {
       newArray.push(arguments[i]);
     }
   }
+
   return newArray;
 }
 
@@ -120,6 +109,7 @@ function calculator(number = 0) {
   if (typeof number !== 'number') {
     throw new Error('number is not a number');
   }
+
   return {
     sum(...args) {
       let result = number;
@@ -130,6 +120,7 @@ function calculator(number = 0) {
 
       return result;
     },
+
     dif(...args) {
       let result = number;
 
@@ -139,6 +130,7 @@ function calculator(number = 0) {
 
       return result;
     },
+
     div(...args) {
       let result = number;
 
@@ -151,6 +143,7 @@ function calculator(number = 0) {
 
       return result;
     },
+
     mul(...args) {
       let result = number;
 
