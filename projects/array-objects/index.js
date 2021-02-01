@@ -69,6 +69,7 @@ function createProxy(obj) {
   const proxyObj = new Proxy(obj, {
     set(target, prop, value) {
       target[prop] = value * value;
+
       return true;
     },
   });
