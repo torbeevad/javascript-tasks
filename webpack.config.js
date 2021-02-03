@@ -3,13 +3,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
 const path = require('path');
-
 const root = path.resolve('projects');
 const projects = fs.readdirSync(root);
 const entries = {};
 const htmlPlugins = [];
 const proxy = {};
-
 for (const project of projects) {
   const projectPath = path.join(root, project);
   entries[project] = projectPath;
@@ -21,17 +19,13 @@ for (const project of projects) {
       chunks: [project],
     })
   );
-
   const settingsPath = path.join(projectPath, 'settings.json');
-
   if (fs.existsSync(settingsPath)) {
     const settings = require(settingsPath);
     Object.assign(proxy, settings.proxy);
   }
 }
-
 const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
-
 module.exports = {
   entry: entries,
   output: {
@@ -51,7 +45,8 @@ module.exports = {
         options: { cacheDirectory: true },
       },
       {
-        test: /projects\/.+\.html/,
+        test: /\.html/,
+        include: [path.resolve(__dirname, 'projects')],
         use: [
           { loader: './scripts/html-inject-loader.js' },
           {
