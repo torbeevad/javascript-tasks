@@ -68,6 +68,4 @@ function once(target, fn) {
   target.addEventListener('click', fn, { once: true });
 }
 
-once(document.querySelector('button'), () => console.log('обработчик выполнился!'));
-
 export { addListener, removeListener, skipDefault, emulateClick, delegate, once };
