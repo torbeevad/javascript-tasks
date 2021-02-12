@@ -19,7 +19,7 @@ import './dnd.html';
 const homeworkContainer = document.querySelector('#app');
 
 const random = (from, to) => {
-  return parseInt(to * Math.random() + from - from + 'px');
+  return parseInt(to * Math.random() + from - from + '');
 };
 
 let currentDrag;
